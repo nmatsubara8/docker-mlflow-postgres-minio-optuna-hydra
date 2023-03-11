@@ -1,0 +1,25 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Djangoスニペット</title>
+  <link rel="stylesheet" href="{% static 'snippets/css/style.css' %}">
+  <!-- <script src="{% static 'js/draw.js' %}"></script> -->
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+
+  <!-- {% include "base_nav.html" %}
+  <main>
+    <div class="container">
+      {% block main %}{% endblock %}
+    </div>
+  </main> -->
+</body>
+</html>

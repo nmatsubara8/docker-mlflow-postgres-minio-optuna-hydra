@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% include "base_nav.html" %}
+  <main>
+    <div class="container">
+      <div class="welcome">
+        <h1 class="title">ようこそ Djangoスニペットへ!</h1>
+        <p class="subtitle">あなたの知見を共有しましょう</p>
+        <a href="{% url 'snippet_new' %}" class="btn btn-primary">スニペットを作成する</a>
+      </div>
+      {% if snippets %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>投稿日</th>
+            <th>タイトル</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for snippet in snippets %}
+          <tr>
+            <th>{{ snippet.created_by.username }}</th>
+            <th>{{ snippet.created_at }}</th>
+            <th><a href="{% url 'snippet_detail' snippet.id %}">{{ snippet.title }}</a></th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+        <p>スニペットはまだ投稿されていません</p>
+      {% endif %}
+    </div>
+  </main>
+{% endblock %}
