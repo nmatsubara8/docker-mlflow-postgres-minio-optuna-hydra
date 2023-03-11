@@ -9,7 +9,7 @@ mlflow              2.2.1
 docker-compose up -d
 ```
 ## サンプルスクリプト実行
-サンプルスクリプトでは、scikit-learn のモデルを学習し、モデルレジストリにデータを保存しています。
+サンプルスクリプトでは、scikit-learn のモデルを学習し、minioをモデルレジストリとしてデータを保存する。
 ```bash
 # コンテナ内実行環境に入る
 docker-compose exec app /bin/bash
@@ -22,8 +22,8 @@ python run_mlflow.py
 
 ### minioコンソール
 localhost:9001 にアクセスしてファイルを確認できる
-user: minio
-password: miniopass
+* user: minio
+* password: miniopass
 
 mlflowフォルダと同階層に作成される minioフォルダ内にモデルファイルが格納されており、こちらからも確認できる
 
