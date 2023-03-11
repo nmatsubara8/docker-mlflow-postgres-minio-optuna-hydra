@@ -13,6 +13,7 @@ import mlflow
 import mlflow.sklearn
 from mlflow.store.artifact.runs_artifact_repo import RunsArtifactRepository
 
+# DB接続設定
 DB = os.environ.get("DB_NAME")
 USER = os.environ.get("DB_USERNAME")
 PASSWORD = os.environ.get("DB_PASSWORD")
@@ -33,6 +34,7 @@ def eval_metrics(actual, pred):
 
 
 def train():
+    # モデルの学習
     # Read the wine-quality csv file from the URL
     csv_url = "http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
     try:
@@ -99,7 +101,7 @@ def train():
 
 
 def search(run_id):
-    """検索例"""
+    """保存したモデル情報の検索例"""
     searcher = MLflowSearcher()
     logger.info("run id searching...")
     searcher.search_model_by_run_id(run_id)
