@@ -11,7 +11,6 @@ from sklearn.model_selection import train_test_split
 
 import mlflow
 import mlflow.sklearn
-from mlflow.store.artifact.runs_artifact_repo import RunsArtifactRepository
 
 # DB接続設定
 DB = os.environ.get("DB_NAME")
@@ -20,7 +19,12 @@ PASSWORD = os.environ.get("DB_PASSWORD")
 HOST = os.environ.get("DB_HOSTNAME")
 PORT = os.environ.get("DB_PORT")
 # mlflow db 設定
-os.environ["MLFLOW_TRACKING_URI"] = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB}"
+# os.environ[
+#    "MLFLOW_TRACKING_URI"
+# ] = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB}"
+# os.environ["MLFLOW_ARTIFACT_ROOT"] = "s3://mlflow/artifacts"
+
+artifact_location = "s3://mlflow/artifacts"
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
@@ -58,9 +62,12 @@ def train():
     l1_ratio = 0.5
 
     # mlflowで記録
-    model_name = "model1"
+    model_name = "model6"
 
-    writer = MlflowWriter(experiment_name=f"exp-{model_name}", artifact_location="s3://mlflow/artifacts")
+    writer = MlflowWriter(
+        experiment_name=f"exp-{model_name}", artifact_location="s3://mlflow/artifacts"
+    )
+
     # with mlflow.start_run() as run:
     lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
     lr.fit(train_x, train_y)
